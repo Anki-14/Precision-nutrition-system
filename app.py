@@ -1,14 +1,13 @@
 from flask import Flask, request, jsonify
-
-import joblib
-import joblib  # or any other library you're using to load your model
+import pickle
 import os
-
 
 app = Flask(__name__)
 
-# Load the model
-model = joblib.load('C:/Users/ADMIN/OneDrive/Desktop/Precision-nutrition-system-main/Food_nutrition_analysis.pkl')
+# Load the model using pickle
+model_path = os.path.join(os.path.dirname(__file__), 'Food_nutrition_analysis.pkl')
+with open(model_path, 'rb') as f:
+    model = pickle.load(f)
 
 @app.route('/')
 def home():
@@ -17,18 +16,22 @@ def home():
 @app.route('/favicon.ico')
 def favicon():
     return '', 204
-# Load the machine learning model
-model_path = os.path.join(os.path.dirname(__file__), 'Food_nutrition_analysis.py')
-model = joblib.load(model_path)
 
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
+        # Get input data from the POST request
         data = request.get_json()
         input_data = data['input']
+
+        # Make prediction using the model
         prediction = model.predict([input_data])
+
+        # Return prediction result as JSON response
         return jsonify({'prediction': prediction.tolist()})
+    
     except Exception as e:
+        # Return error message in case of failure
         return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
