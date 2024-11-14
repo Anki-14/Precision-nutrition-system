@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # Load the model
-model = joblib.load('C:/Users/ADMIN/OneDrive/Desktop/Precision-nutrition-system-main/Food_nutrition_analysis.pkl')
+model = joblib.load('Food_nutrition_analysis.pkl')
 
 @app.route('/')
 def home():
