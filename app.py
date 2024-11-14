@@ -30,6 +30,7 @@ import plotly.express as px
 import seaborn as sns
 import plotly.offline as py
 import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 
 
 # In[2]:
