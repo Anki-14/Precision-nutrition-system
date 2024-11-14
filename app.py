@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import joblib  # or any other library you're using to load your model
+import os
 
 # Create the Flask app
 app = Flask(__name__)
