@@ -1,5 +1,9 @@
 from flask import Flask, request, jsonify
+
 import joblib
+import joblib  # or any other library you're using to load your model
+import os
+
 
 app = Flask(__name__)
 
@@ -13,6 +17,9 @@ def home():
 @app.route('/favicon.ico')
 def favicon():
     return '', 204
+# Load the machine learning model
+model_path = os.path.join(os.path.dirname(__file__), 'Food_nutrition_analysis.py')
+model = joblib.load(model_path)
 
 @app.route('/predict', methods=['POST'])
 def predict():
