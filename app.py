@@ -5,8 +5,8 @@ import joblib  # or any other library you're using to load your model
 app = Flask(__name__)
 
 # Load the machine learning model
-model = joblib.load('Precision-nutrition-system-main/Food_nutrition_analysis.py')
-  # Adjust the path
+model_path = os.path.join(os.path.dirname(__file__), 'Food_nutrition_analysis.py')
+model = joblib.load(model_path)
 
 # Define the prediction route
 @app.route('/predict', methods=['POST'])
